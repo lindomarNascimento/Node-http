@@ -69,7 +69,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const repositoryIndex = repositories.findIndex(repository => repository.id == id)
 
   if(repositoryIndex < 0) {
-    return response.status(404).json({ error: 'Repository not found.' })
+    return response.status(400).json({ error: 'Repository not found.' })
   }
   const repository = repositories[repositoryIndex]
 
@@ -77,7 +77,7 @@ app.post("/repositories/:id/like", (request, response) => {
 
   repository.likes = likes + 1
 
-  return response.json(repository)
+  return response.status(200).json(repository)
 });
 
 module.exports = app;
